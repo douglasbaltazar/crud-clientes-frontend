@@ -41,11 +41,6 @@ export class EditClientesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reactiveForm = this.builder.group({
-      nome: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      telefone: ['', Validators.required]
-    })
   }
 
   onNoClick(): void {
