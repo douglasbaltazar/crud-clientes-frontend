@@ -46,5 +46,8 @@ export class EditClientesComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  cadastrar(data: Cliente): void {
+    //console.log(data)
+  }
 
 }

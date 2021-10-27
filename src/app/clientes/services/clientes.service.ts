@@ -21,4 +21,11 @@ export class ClientesService {
         tap(clientes => console.log(clientes))
       );
   }
+
+  cadastrar(data: Cliente) {
+    return this.httpClient.post<Cliente>(`${this.API}/clientes`, data)
+      .subscribe((result => {
+        console.log(result);
+      }))
+  }
 }

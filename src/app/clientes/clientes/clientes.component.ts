@@ -26,7 +26,10 @@ export class ClientesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       // fechou
-      console.log(result);
+      if(result) {
+        console.log(result);
+        this.clientesService.cadastrar(result);
+      }
     });
   }
 
