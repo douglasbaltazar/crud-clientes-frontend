@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Cadastrar Cliente</h1>
+<form [formGroup]="reactiveForm">
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Nome Completo</mat-label>
+      <input
+        matInput
+        placeholder="Nome Completo"
+        [(ngModel)]="data.nome"
+        [formControl]="nome"
+        required
+      />
+      <mat-error *ngIf="nome.invalid">{{ getErrorMsgNome() }}</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="email@email.com"
+        [(ngModel)]="data.email"
+        [formControl]="email"
+        required
+      />
+      <mat-error *ngIf="email.invalid">{{ getErrorMsgEmail() }}</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+      <mat-label>Telefone</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="data.telefone"
+        [formControl]="telefone"
+        required
+      />
+      <mat-error *ngIf="telefone.invalid">{{ getErrorMsgTel() }}</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" color="warn">Cancelar</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="telefone.invalid || email.invalid || nome.invalid" color="primary">
+      Cadastrar
+    </button>
+  </div>
+</form>
