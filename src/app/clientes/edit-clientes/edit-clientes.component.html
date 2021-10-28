@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Cadastrar Cliente</h1>
-<form [formGroup]="reactiveForm">
+<form>
   <div mat-dialog-content>
     <mat-form-field appearance="fill">
       <mat-label>Nome Completo</mat-label>
@@ -39,7 +39,7 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()" color="warn">Cancelar</button>
-    <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="telefone.invalid || email.invalid || nome.invalid" color="primary" (click)="cadastrar(data)">
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="telefone.invalid || email.invalid || nome.invalid" color="primary">
       Cadastrar
     </button>
   </div>

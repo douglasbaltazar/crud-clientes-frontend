@@ -19,9 +19,9 @@ export class ClientesComponent implements OnInit {
     this.clientes$ = this.clientesService.list();
   }
 
-  openDialog(): void {
+  openDialog(data?: Cliente): void {
     const dialogRef = this.dialog.open(EditClientesComponent, {
-      data: {}
+      data: {data}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -31,6 +31,11 @@ export class ClientesComponent implements OnInit {
         this.clientesService.cadastrar(result);
       }
     });
+  }
+
+  public getRecord(row: Cliente){
+    console.log(row);
+    this.openDialog(row);
   }
 
   ngOnInit(): void {
