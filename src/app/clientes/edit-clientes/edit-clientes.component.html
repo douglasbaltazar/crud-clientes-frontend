@@ -42,7 +42,7 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()" color="warn">Cancelar</button>
-    <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="telefone.invalid || email.invalid || nome.invalid" color="primary">
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="telefone.invalid || email.invalid || nome.invalid" color="primary" (click)="onSubmit()">
       Cadastrar
     </button>
   </div>

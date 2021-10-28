@@ -7,7 +7,7 @@
 
   </mat-toolbar>
 
-  <div *ngIf="clientes$ | async as clientes; else loading">
+  <div *ngIf="clientes$ as clientes; else loading">
     <div>
       <table mat-table [dataSource]="clientes" class="mat-elevation-z8">
         <!-- Nome Column -->

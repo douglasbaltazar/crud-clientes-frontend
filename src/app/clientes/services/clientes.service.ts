@@ -1,7 +1,7 @@
 import { Cliente } from './../model/cliente';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap, delay } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -19,18 +19,15 @@ export class ClientesService {
 
   cadastrar(data: Cliente) {
     return this.httpClient
-      .post<Cliente>(`${this.API}/clientes`, data)
-      .subscribe((result) => {});
+      .post<Cliente>(`${this.API}/clientes`, data);
   }
   atualizar(data: Cliente) {
     return this.httpClient
-      .put<Cliente>(`${this.API}/clientes/${data.id}`, data)
-      .subscribe((result) => {});
+      .put<Cliente>(`${this.API}/clientes/${data.id}`, data);
   }
 
   remover(data: Cliente) {
     return this.httpClient
-      .delete<Cliente>(`${this.API}/clientes/${data.id}`)
-      .subscribe((result) => {});
+      .delete<Cliente>(`${this.API}/clientes/${data.id}`);
   }
 }

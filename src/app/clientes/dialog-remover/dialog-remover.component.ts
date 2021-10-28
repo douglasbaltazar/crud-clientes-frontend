@@ -5,6 +5,8 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { ClientesService } from '../services/clientes.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dialog-remover',
@@ -15,7 +17,9 @@ export class DialogRemoverComponent implements OnInit {
   message: string = 'Deseja realmente deletar?';
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private dialogRef: MatDialogRef<DialogRemoverComponent>
+    private dialogRef: MatDialogRef<DialogRemoverComponent>,
+    private clienteService: ClientesService,
+    private _snackBar: MatSnackBar
   ) {
     if (data) {
       this.message = data.message || this.message;
@@ -25,6 +29,15 @@ export class DialogRemoverComponent implements OnInit {
 
   ngOnInit(): void {}
   onConfirmClick(): void {
-    this.dialogRef.close(this.data);
+    this.clienteService.remover(this.data).subscribe(() => {
+      this.dialogRef.close(this.data);
+      this.openSnackBar(`Cliente ${this.data.nome} removido com sucesso.`)
+    })
+  }
+  openSnackBar(mensagem: string) {
+    this._snackBar.open(`${mensagem}`, 'OK', {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 }

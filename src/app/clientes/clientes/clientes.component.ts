@@ -15,19 +15,14 @@ import { MatSnackBar } from '@angular/material/snack-bar'
   styleUrls: ['./clientes.component.scss'],
 })
 export class ClientesComponent implements OnInit {
-  clientes$: Observable<Cliente[]>;
-  update=new BehaviorSubject<boolean>(false);
+  clientes$: Cliente[];
   displayedColumns = ['nome', 'telefone', 'email', 'actions'];
   constructor(
     private clientesService: ClientesService,
     public dialog: MatDialog,
     private changeDetectorRefs: ChangeDetectorRef,
     private _snackBar: MatSnackBar
-  ) {
-    // this.clientesService = new ClientesService();
-    // this.clientes$ = this.clientesService.list();
-    this.refresh();
-  }
+  ) {  }
 
   openDialog(data?: Cliente): void {
     const dialogRef = this.dialog.open(EditClientesComponent, {
@@ -40,15 +35,7 @@ export class ClientesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result && result.id) {
-        this.clientesService.atualizar(result);
-        this.refresh();
-        this.openSnackBar(`Cliente ${result.nome} atualizado com sucesso!`)
-      } else if (result && !result.id) {
-        this.clientesService.cadastrar(result);
-        this.refresh();
-        this.openSnackBar(`Cliente ${result.nome} cadastrado com sucesso!`)
-      }
+      this.refresh();
     });
   }
 
@@ -64,9 +51,7 @@ export class ClientesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result.id) {
-        this.clientesService.remover(result);
         this.refresh();
-        this.openSnackBar(`Cliente ${result.nome} removido com sucesso!`)
       }
     });
   }
@@ -80,26 +65,15 @@ export class ClientesComponent implements OnInit {
   }
 
   refresh() {
-    this.update.subscribe(update=>update === true ? this.refresh() : '');
-    this.clientes$ = this.clientesService.list();
+    this.clientesService.list().subscribe((res) => {
+      this.clientes$ = res;
+      this.changeDetectorRefs.detectChanges();
+    });
   }
 
   public delete(row: Cliente) {
     this.openDialogConfirm(row);
   }
 
-  openSnackBar(mensagem: string) {
-    this._snackBar.open(`${mensagem}`, 'OK', {
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-    });
-  }
 
-  // dataSource = new MatTableDataSource<Cliente>();
-
-  // refresh() {
-  // this.clientesService.list().subscribe((data: Cliente[]) => {
-  //   this.dataSource.data = data;
-  //   }
-  // }
 }
