@@ -14,13 +14,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EditClientesComponent } from './edit-clientes/edit-clientes.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MatInputModule } from '@angular/material/input'
+import { MatInputModule } from '@angular/material/input';
+import { DialogRemoverComponent } from './dialog-remover/dialog-remover.component'
 
 
 @NgModule({
   declarations: [
     ClientesComponent,
-    EditClientesComponent
+    EditClientesComponent,
+    DialogRemoverComponent
   ],
   imports: [
     CommonModule,
