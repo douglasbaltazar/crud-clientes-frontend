@@ -16,6 +16,7 @@ import { EditClientesComponent } from './edit-clientes/edit-clientes.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { DialogRemoverComponent } from './dialog-remover/dialog-remover.component'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { DialogRemoverComponent } from './dialog-remover/dialog-remover.componen
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

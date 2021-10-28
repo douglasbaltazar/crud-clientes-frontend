@@ -7,6 +7,7 @@ import { ClientesService } from '../services/clientes.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { EditClientesComponent } from '../edit-clientes/edit-clientes.component';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
   selector: 'app-clientes',
@@ -20,7 +21,8 @@ export class ClientesComponent implements OnInit {
   constructor(
     private clientesService: ClientesService,
     public dialog: MatDialog,
-    private changeDetectorRefs: ChangeDetectorRef
+    private changeDetectorRefs: ChangeDetectorRef,
+    private _snackBar: MatSnackBar
   ) {
     // this.clientesService = new ClientesService();
     // this.clientes$ = this.clientesService.list();
@@ -41,9 +43,11 @@ export class ClientesComponent implements OnInit {
       if (result && result.id) {
         this.clientesService.atualizar(result);
         this.refresh();
+        this.openSnackBar(`Cliente ${result.nome} atualizado com sucesso!`)
       } else if (result && !result.id) {
         this.clientesService.cadastrar(result);
         this.refresh();
+        this.openSnackBar(`Cliente ${result.nome} cadastrado com sucesso!`)
       }
     });
   }
@@ -62,6 +66,7 @@ export class ClientesComponent implements OnInit {
       if (result && result.id) {
         this.clientesService.remover(result);
         this.refresh();
+        this.openSnackBar(`Cliente ${result.nome} removido com sucesso!`)
       }
     });
   }
@@ -81,6 +86,13 @@ export class ClientesComponent implements OnInit {
 
   public delete(row: Cliente) {
     this.openDialogConfirm(row);
+  }
+
+  openSnackBar(mensagem: string) {
+    this._snackBar.open(`${mensagem}`, 'OK', {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 
   // dataSource = new MatTableDataSource<Cliente>();

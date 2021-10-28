@@ -19,7 +19,7 @@ export class DialogRemoverComponent implements OnInit {
   ) {
     if (data) {
       this.message = data.message || this.message;
-      this.message = `Deseja realmente excluir o Cliente: ${data.nome}.`;
+      this.message = `Deseja realmente excluir o Cliente: ${data.nome}?`;
     }
   }
 
