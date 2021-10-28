@@ -1,4 +1,7 @@
-<h1 mat-dialog-title>Cadastrar Cliente</h1>
+
+<div *ngIf="data.id;then title else title2"></div>
+<ng-template #title><h1 mat-dialog-title>Editar Cliente</h1></ng-template>
+<ng-template #title2><h1 mat-dialog-title>Cadastrar Cliente</h1></ng-template>
 <form>
   <div mat-dialog-content>
     <mat-form-field appearance="fill">

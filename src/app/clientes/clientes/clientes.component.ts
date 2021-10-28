@@ -21,24 +21,28 @@ export class ClientesComponent implements OnInit {
 
   openDialog(data?: Cliente): void {
     const dialogRef = this.dialog.open(EditClientesComponent, {
-      data: {data}
+      data: {nome: data?.nome, telefone: data?.telefone, email: data?.email, id: data?.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       // fechou
-      if(result) {
-        console.log(result);
+      console.log(result);
+      if(result && result.id)  {
+        this.clientesService.atualizar(result);
+        this.ngOnInit();
+      } else if(result && !result.id) {
         this.clientesService.cadastrar(result);
+        this.ngOnInit();
       }
     });
   }
 
   public getRecord(row: Cliente){
-    console.log(row);
     this.openDialog(row);
   }
 
   ngOnInit(): void {
+    this.clientes$ = this.clientesService.list()
   }
 
 }

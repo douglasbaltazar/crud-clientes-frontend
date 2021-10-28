@@ -37,10 +37,10 @@ export class EditClientesComponent implements OnInit {
   }
 
   constructor(public dialogRef: MatDialogRef<EditClientesComponent>, @Inject(MAT_DIALOG_DATA) public data: Cliente, private builder: FormBuilder) {
+    console.log(data)
   }
 
   ngOnInit(): void {
-    console.log(this.data)
   }
 
   onNoClick(): void {
